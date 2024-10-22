@@ -1,6 +1,6 @@
 import DataBase
 import TravelPlan
-import Event
+import Activity
 
 # Entrance of the app
 def main ():
@@ -31,8 +31,8 @@ def main ():
             haveTravelPlanOpened = False
             travelPlan = TravelPlan.TravelPlan()
         # adds an event into the travel plan opened
-        elif haveTravelPlanOpened and userInput == "Add event":
-            AddEvent(travelPlan)
+        elif haveTravelPlanOpened and userInput == "Add activity":
+            AddActivity(travelPlan)
         elif userInput == "Quit":
             quitApp = True
         
@@ -48,10 +48,10 @@ def ShowTravelPlanList():
 def CreateTravelPlan():
     return TravelPlan.TravelPlan()
 
-# TODO: function and class to create an event to add in travel. Event should include cost, time and description.(tickets if any)
-def AddEvent(travelPlan):
-    event = Event.Event()
-    travelPlan.AddEvent(event)
+# TODO: function and class to create an event to add in travel. Activity should include cost, time and description.(tickets if any)
+def AddActivity(travelPlan):
+    activity = Activity.Activity()
+    travelPlan.AddActivity(activity)
 
 # TODO: validate user input and return the input.(Valid input: Create TravelPlan, )
 def UserInput():

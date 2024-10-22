@@ -1,6 +1,6 @@
 import Event
 
-class Travel:
+class TravelPlan:
     def __init__(self):
         pass
 

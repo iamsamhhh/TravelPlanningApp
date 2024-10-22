@@ -1,72 +1,86 @@
 import DataBase
-import Travel
+import TravelPlan
 import Event
 
+# Entrance of the app
 def main ():
+    # Retrive user data
     userData = UserRegistration()
     quitApp = False
-    travel = Travel.Travel()
-    haveTravelOpen = False
+    # initialize travel plan to store the current travel plan editing
+    travelPlan = TravelPlan
+    # boolean to check if there there is travel plan opened.
+    haveTravelPlanOpened = False
     # Main loop
     while not quitApp:
-        input = UserInput()
-        if input == "Create travel":
-            travel = CreateTravel()
-            haveTravelOpen = True
-        elif input == "Show travel list":
-            ShowTravelList()
-        elif input == "Open travel":
-            travel = OpenTravel()
-            haveTravelOpen = True
-        elif haveTravelOpen and input == "Close travel":
-            haveTravelOpen = False
-            travel = Travel.Travel()
-        elif haveTravelOpen and input == "Add event":
-            AddEvent(travel)
-        elif input == "Quit":
+        # Get the user's input and decide what to do
+        userInput = UserInput()
+        # Creates a new travel plan
+        if userInput == "Create travel plan":
+            travelPlan = CreateTravelPlan()
+            haveTravelPlanOpened = True
+        # Display list of travel plan
+        elif userInput == "Show travel plan list":
+            ShowTravelPlanList()
+        # Open a travel plan
+        elif userInput == "Open travel plan":
+            travelPlan = OpenTravelPlan()
+            haveTravelPlanOpened = True
+        # Close a travel plan
+        elif haveTravelPlanOpened and userInput == "Close travel plan":
+            haveTravelPlanOpened = False
+            travelPlan = TravelPlan.TravelPlan()
+        # adds an event into the travel plan opened
+        elif haveTravelPlanOpened and userInput == "Add event":
+            AddEvent(travelPlan)
+        elif userInput == "Quit":
             quitApp = True
         
+# TODO: Open an existing travel plan
+def OpenTravelPlan():
+    return TravelPlan.TravelPlan()
 
-def OpenTravel():
-    return Travel.Travel()
-
-def ShowTravelList():
-    print("Travel list")
+# TODO: show the list of travel plan user created
+def ShowTravelPlanList():
+    print("TravelPlan list")
         
-# TODO: function and class to create travel that record cost, timeline, tickets & hotel info.
-def CreateTravel():
-    return Travel.Travel()
+# TODO: function and class to create travel plan that record cost, timeline, tickets & hotel info.
+def CreateTravelPlan():
+    return TravelPlan.TravelPlan()
 
 # TODO: function and class to create an event to add in travel. Event should include cost, time and description.(tickets if any)
-def AddEvent(travel):
+def AddEvent(travelPlan):
     event = Event.Event()
-    travel.AddEvent(event)
+    travelPlan.AddEvent(event)
 
-# TODO: validate user input and return the input.(Valid input: Create travel, )
+# TODO: validate user input and return the input.(Valid input: Create TravelPlan, )
 def UserInput():
-    return ""
+    UserInput = input("Enter the action you want to perform(type \"help\" to show possible action): ")
+    return UserInput
 
+# Function to ask for user name and password and return user data
 def UserRegistration():
-    userNew = input("Are you new to Travel planning app? (yes/no):")
+    userNew = input("Are you new to travel planning app? (yes/no):")
     if userNew == "yes":
         return UserSignUp()
     else:
-        userName = input("Enter user name")
-        password = input("Enter password")
+        userName = input("Enter user name: ")
+        password = input("Enter password: ")
+        # TODO: Check if user is signed up
         data = DataBase.load(userName)
         if data.password == password:
             print("logged in!")
             return data
         else:
             while password != data.password:
-                password = input("Password incorrect!Enter password")
+                password = input("Password incorrect! Enter password: ")
             print("logged in!")
             return data
 
-
+# function to let user sign up account
 def UserSignUp():
-    userName = input("Enter user name")
-    password = input("Enter password")
+    userName = input("Enter user name: ")
+    password = input("Enter password: ")
     return DataBase.UserData(userName, password)
     
 

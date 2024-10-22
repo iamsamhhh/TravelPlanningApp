@@ -1,4 +1,6 @@
 from sqlitedict import SqliteDict
+
+# Save data using a key
 def save(key, value, cache_file="data.sqlite3"):
     try:
         with SqliteDict(cache_file) as mydict:
@@ -6,7 +8,8 @@ def save(key, value, cache_file="data.sqlite3"):
             mydict.commit() # Need to commit() to actually flush the data
     except Exception as ex:
         print("Error during storing data (Possibly unsupported):", ex)
- 
+
+# Returns the stored data using the key
 def load(key, cache_file="data.sqlite3"):
     try:
         with SqliteDict(cache_file) as mydict:
@@ -15,6 +18,7 @@ def load(key, cache_file="data.sqlite3"):
     except Exception as ex:
         print("Error during loading data:", ex)
 
+# This class stores the user data
 class UserData:
     def __init__(self, userName, password):
         self.userName = userName

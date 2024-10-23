@@ -1,6 +1,7 @@
 import DataBase
 import TravelPlan
 import Activity
+import UserInput
 
 # Entrance of the app
 def main ():
@@ -14,7 +15,7 @@ def main ():
     # Main loop
     while not quitApp:
         # Get the user's input and decide what to do
-        userInput = UserInput()
+        userInput = UserInput.UserInput()
         # Creates a new travel plan
         if userInput == "Create travel plan":
             travelPlan = CreateTravelPlan()
@@ -52,11 +53,6 @@ def CreateTravelPlan():
 def AddActivity(travelPlan):
     activity = Activity.Activity()
     travelPlan.AddActivity(activity)
-
-# TODO: validate user input and return the input.(Valid input: Create TravelPlan, )
-def UserInput():
-    UserInput = input("Enter the action you want to perform(type \"help\" to show possible action): ")
-    return UserInput
 
 # Function to ask for user name and password and return user data
 def UserRegistration():

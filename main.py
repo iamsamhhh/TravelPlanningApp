@@ -25,7 +25,8 @@ def main ():
             ShowTravelPlanList()
         # Open a travel plan
         elif userInput == "Open travel plan":
-            travelPlan = OpenTravelPlan()
+            name = input("Enter the name of the travel plan to open: ")
+            travelPlan = OpenTravelPlan(name)
             haveTravelPlanOpened = True
         # Close a travel plan
         elif haveTravelPlanOpened and userInput == "Close travel plan":
@@ -38,7 +39,7 @@ def main ():
             quitApp = True
         
 # TODO: Open an existing travel plan
-def OpenTravelPlan():
+def OpenTravelPlan(name):
     return TravelPlan()
 
 # TODO: show the list of travel plan user created
@@ -47,7 +48,8 @@ def ShowTravelPlanList():
         
 # TODO: function and class to create travel plan that record cost, timeline, tickets & hotel info.
 def CreateTravelPlan():
-    return TravelPlan()
+    name = input("Enter the name of the travel plan: ")
+    return TravelPlan(name)
 
 # TODO: function and class to create an event to add in travel. Activity should include cost, time and description.(tickets if any)
 def AddActivity(travelPlan):

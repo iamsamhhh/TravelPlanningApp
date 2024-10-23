@@ -1,8 +1,13 @@
 from Activity import *
 
 class TravelPlan:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.activities = []  # List to hold activitys
+    
+    '''Function to create an empty travel plan'''
+    def __init__(self):
+        pass
 
     def add_activity(self, activity):
         """Adds an activity to the travel plan."""

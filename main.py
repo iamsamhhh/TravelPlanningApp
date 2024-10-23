@@ -1,7 +1,7 @@
 import DataBase
-import TravelPlan
-import Activity
-import UserInput
+from TravelPlan import *
+from Activity import *
+from UserInput import *
 
 # Entrance of the app
 def main ():
@@ -9,13 +9,13 @@ def main ():
     userData = UserRegistration()
     quitApp = False
     # initialize travel plan to store the current travel plan editing
-    travelPlan = TravelPlan
+    travelPlan = TravelPlan()
     # boolean to check if there there is travel plan opened.
     haveTravelPlanOpened = False
     # Main loop
     while not quitApp:
         # Get the user's input and decide what to do
-        userInput = UserInput.UserInput()
+        userInput = UserInput()
         # Creates a new travel plan
         if userInput == "Create travel plan":
             travelPlan = CreateTravelPlan()
@@ -30,7 +30,7 @@ def main ():
         # Close a travel plan
         elif haveTravelPlanOpened and userInput == "Close travel plan":
             haveTravelPlanOpened = False
-            travelPlan = TravelPlan.TravelPlan()
+            travelPlan = TravelPlan()
         # adds an event into the travel plan opened
         elif haveTravelPlanOpened and userInput == "Add activity":
             AddActivity(travelPlan)
@@ -51,7 +51,7 @@ def CreateTravelPlan():
 
 # TODO: function and class to create an event to add in travel. Activity should include cost, time and description.(tickets if any)
 def AddActivity(travelPlan):
-    activity = Activity.Activity()
+    activity = Activity()
     travelPlan.AddActivity(activity)
 
 # Function to ask for user name and password and return user data

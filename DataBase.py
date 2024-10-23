@@ -22,12 +22,12 @@ def load(key, cache_file="data.sqlite3"):
 def UserExist(key):
     try:
         with SqliteDict("data.sqlite3") as mydict:
-            for i in mydict.keys:
+            for i in mydict.keys():
                 if i == key:
                     return True
             return False
     except Exception as ex:
-        print("Error during loading data:", ex)
+        print("Error during searching data:", ex)
 
 # This class stores the user data
 class UserData:
@@ -35,7 +35,16 @@ class UserData:
         self.userName = userName
         self.password = password
         self.travelPlanList = []
-        save(userName, self)
+    
+    def load(self):
+        rawData = load(self.userName)
+        self.password = rawData.password
+        for travelPlanName, activities in rawData.travelPlans.items():
+            travelPlan = TravelPlan(travelPlanName)
+            for activityName, (description, cost, date_time) in activities.items():
+                travelPlan.add_activity(Activity(activityName, description, cost, date_time))
+            self.travelPlanList.append(travelPlan)
+        
     
     def AddTravelPlan(self, travelPlan):
         for item in self.travelPlanList:
@@ -67,5 +76,16 @@ class UserData:
         return False
 
     def Save(self):
-        save(self.userName, self)
-    
+        save(self.userName, UserRawData(self))
+
+class UserRawData:
+    def __init__(self, userData):
+        self.userName = userData.userName
+        self.password = userData.password
+        self.travelPlans = {}
+        for i in userData.travelPlanList:
+            activities = {}
+            for j in i.activities:
+                activities[j.name] = (j.description, j.cost, j.date_time)
+            self.travelPlans[i.name] = activities
+

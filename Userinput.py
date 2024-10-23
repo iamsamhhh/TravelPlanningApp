@@ -7,7 +7,8 @@ def UserInput():
         "4": "Close travel plan",
         "5": "Add activity",
         "6": "Show timeline",
-        "7": "Quit"
+        "7": "Show total cost",
+        "8": "Quit"
     }
 
     print("Please select an option:")

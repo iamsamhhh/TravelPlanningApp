@@ -9,7 +9,7 @@ class TravelPlan:
         """Adds an activity to the travel plan."""
         self.activities.append(activity)
 
-    def show_total_cost(self):
+    def get_total_cost(self):
         """Calculates and returns the total cost of all activitys."""
         total_cost = sum(activity.cost for activity in self.activities)
         return total_cost
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     travel_plan.add_activity(activity1)
     travel_plan.add_activity(activity2)
 
-    print(f"Total Cost: ${travel_plan.show_total_cost()}")
+    print(f"Total Cost: ${travel_plan.get_total_cost()}")
     travel_plan.display_timeline()
     travel_plan.delete_activity("Beach Trip")
     travel_plan.display_timeline()

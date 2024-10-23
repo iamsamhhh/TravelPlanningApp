@@ -1,11 +1,11 @@
 def UserInput():
     """Prompt for user input and validate it."""
     valid_inputs = {
-        "1": "Create travel",
-        "2": "Show travel list",
-        "3": "Open travel",
-        "4": "Close travel",
-        "5": "Add event",
+        "1": "Create travel plan",
+        "2": "Show travel plan list",
+        "3": "Open travel plan",
+        "4": "Close travel plan",
+        "5": "Add activity",
         "6": "Quit"
     }
 

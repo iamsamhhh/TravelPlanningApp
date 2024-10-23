@@ -1,6 +1,7 @@
 import DataBase
-import TravelPlan
-import Activity
+from TravelPlan import *
+from Activity import *
+from UserInput import *
 
 # Entrance of the app
 def main ():
@@ -8,7 +9,7 @@ def main ():
     userData = UserRegistration()
     quitApp = False
     # initialize travel plan to store the current travel plan editing
-    travelPlan = TravelPlan
+    travelPlan = TravelPlan()
     # boolean to check if there there is travel plan opened.
     haveTravelPlanOpened = False
     # Main loop
@@ -24,12 +25,13 @@ def main ():
             ShowTravelPlanList()
         # Open a travel plan
         elif userInput == "Open travel plan":
-            travelPlan = OpenTravelPlan()
+            name = input("Enter the name of the travel plan to open: ")
+            travelPlan = OpenTravelPlan(name)
             haveTravelPlanOpened = True
         # Close a travel plan
         elif haveTravelPlanOpened and userInput == "Close travel plan":
             haveTravelPlanOpened = False
-            travelPlan = TravelPlan.TravelPlan()
+            travelPlan = TravelPlan()
         # adds an event into the travel plan opened
         elif haveTravelPlanOpened and userInput == "Add activity":
             AddActivity(travelPlan)
@@ -37,8 +39,8 @@ def main ():
             quitApp = True
         
 # TODO: Open an existing travel plan
-def OpenTravelPlan():
-    return TravelPlan.TravelPlan()
+def OpenTravelPlan(name):
+    return TravelPlan()
 
 # TODO: show the list of travel plan user created
 def ShowTravelPlanList():
@@ -46,17 +48,13 @@ def ShowTravelPlanList():
         
 # TODO: function and class to create travel plan that record cost, timeline, tickets & hotel info.
 def CreateTravelPlan():
-    return TravelPlan.TravelPlan()
+    name = input("Enter the name of the travel plan: ")
+    return TravelPlan(name)
 
 # TODO: function and class to create an event to add in travel. Activity should include cost, time and description.(tickets if any)
 def AddActivity(travelPlan):
-    activity = Activity.Activity()
-    travelPlan.AddActivity(activity)
-
-# TODO: validate user input and return the input.(Valid input: Create TravelPlan, )
-def UserInput():
-    UserInput = input("Enter the action you want to perform(type \"help\" to show possible action): ")
-    return UserInput
+    activity = create_activity()
+    travelPlan.add_activity(activity)
 
 # Function to ask for user name and password and return user data
 def UserRegistration():

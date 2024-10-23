@@ -39,7 +39,7 @@ def main ():
         
 # TODO: Open an existing travel plan
 def OpenTravelPlan():
-    return TravelPlan.TravelPlan()
+    return TravelPlan()
 
 # TODO: show the list of travel plan user created
 def ShowTravelPlanList():
@@ -47,12 +47,12 @@ def ShowTravelPlanList():
         
 # TODO: function and class to create travel plan that record cost, timeline, tickets & hotel info.
 def CreateTravelPlan():
-    return TravelPlan.TravelPlan()
+    return TravelPlan()
 
 # TODO: function and class to create an event to add in travel. Activity should include cost, time and description.(tickets if any)
 def AddActivity(travelPlan):
-    activity = Activity()
-    travelPlan.AddActivity(activity)
+    activity = create_activity()
+    travelPlan.add_activity(activity)
 
 # Function to ask for user name and password and return user data
 def UserRegistration():

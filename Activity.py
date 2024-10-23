@@ -22,7 +22,7 @@ def get_float_input(prompt):
         except ValueError:
             print("ERROR! Please enter a valid number.")
 
-def add_activity():
+def create_activity():
     """Function to prompt user for activity details and create an Activity object."""
     name = input("Enter the name of the activity: ")
     description = input("Enter a description of the activity: ")
@@ -33,7 +33,8 @@ def add_activity():
     new_activity = Activity(name, description, cost, date_time)
     print("\nActivity Created Successfully!")
     new_activity.display_activity_details()
+    return new_activity
 
 # Example usage
 if __name__ == "__main__":
-    add_activity()
+    create_activity()

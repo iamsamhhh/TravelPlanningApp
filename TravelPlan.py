@@ -4,11 +4,7 @@ class TravelPlan:
     def __init__(self, name):
         self.name = name
         self.activities = []  # List to hold activitys
-    
-    '''Function to create an empty travel plan'''
-    def __init__(self):
-        pass
-
+        
     def add_activity(self, activity):
         """Adds an activity to the travel plan."""
         self.activities.append(activity)
@@ -39,6 +35,7 @@ if __name__ == "__main__":
     activity1 = Activity("Beach Trip", "Visit the beach for a day", 100, "2024-10-30 10:00")
     activity2 = Activity("Mountain Hike", "Hiking in the mountains", 150, "2024-11-01 08:00")
 
+    name = "New travel plan"
     travel_plan = TravelPlan()
     travel_plan.add_activity(activity1)
     travel_plan.add_activity(activity2)

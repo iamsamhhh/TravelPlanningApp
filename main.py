@@ -70,9 +70,8 @@ def AddActivity(travelPlan):
 def UserRegistration():
     userName = input("Enter user name: ")
     password = input("Enter password: ")
-    data = DataBase.UserData(userName, password)
     if DataBase.UserExist(userName):
-        data.load()
+        data = DataBase.load(userName)
         if data.password == password:
             print("logged in!")
             return data
@@ -81,7 +80,9 @@ def UserRegistration():
                 password = input("Password incorrect! Enter password: ")
             print("logged in!")
             return data
-    return data
+    else:
+        data = DataBase.UserData(userName, password)
+        return data
         
 
 if __name__ == '__main__':

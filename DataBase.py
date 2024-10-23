@@ -35,15 +35,7 @@ class UserData:
         self.userName = userName
         self.password = password
         self.travelPlanList = []
-    
-    def load(self):
-        rawData = load(self.userName)
-        self.password = rawData.password
-        for travelPlanName, activities in rawData.travelPlans.items():
-            travelPlan = TravelPlan(travelPlanName)
-            for activityName, (description, cost, date_time) in activities.items():
-                travelPlan.add_activity(Activity(activityName, description, cost, date_time))
-            self.travelPlanList.append(travelPlan)
+        self.Save()
         
     
     def AddTravelPlan(self, travelPlan):
@@ -76,16 +68,5 @@ class UserData:
         return False
 
     def Save(self):
-        save(self.userName, UserRawData(self))
-
-class UserRawData:
-    def __init__(self, userData):
-        self.userName = userData.userName
-        self.password = userData.password
-        self.travelPlans = {}
-        for i in userData.travelPlanList:
-            activities = {}
-            for j in i.activities:
-                activities[j.name] = (j.description, j.cost, j.date_time)
-            self.travelPlans[i.name] = activities
-
+        # save(self.userName, UserRawData(self))
+        save(self.userName, self)

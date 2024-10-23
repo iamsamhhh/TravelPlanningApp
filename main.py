@@ -13,6 +13,10 @@ def main ():
     travelPlan = TravelPlan("")
     # Main loop
     while not quitApp:
+
+        if haveTravelPlanOpened:
+            print(f"Current travel plan opened: {travelPlan.name}")
+        
         # Get the user's input and decide what to do
         userInput = UserInput()
 
@@ -51,9 +55,12 @@ def main ():
             userData.Save()
         elif haveTravelPlanOpened and userInput == "Show timeline":
             travelPlan.display_timeline()
+        elif haveTravelPlanOpened and userInput == "Show total cost":
+            print(f"total cost of travel plan '{travelPlan.name}' is ${travelPlan.get_total_cost():.2f}")
         elif userInput == "Quit":
             userData.Save()
             quitApp = True
+        input("Enter any key to continue...\n")
 
 # TODO: show the list of travel plan user created
 def ShowTravelPlanList(userData):

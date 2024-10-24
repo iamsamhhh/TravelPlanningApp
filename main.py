@@ -1,5 +1,5 @@
 import DataStorage
-import DataBase
+from DataBase import *
 from TravelPlan import *
 from Activity import *
 from UserInput import *
@@ -59,13 +59,13 @@ def main():
             print(f"Total cost of travel plan '{travelPlan.name}' is ${travelPlan.get_total_cost():.2f}")
 
         elif userInput == "Check review":
-            placeName = input("Enter the place you want to look up reviews")
+            placeName = input("Enter the place you want to look up reviews: ")
             place = ReviewModule.Place(placeName)
             if place.Exist():
                 place.Load()
                 place.ShowReview()
             else:
-                print(f"There are currently no review for {place}.")
+                print(f"There are currently no review for {placeName}.")
 
         elif userInput == "Quit":
             userData.Save()
@@ -89,8 +89,8 @@ def AddActivity(travelPlan):
 def UserRegistration():
     userName = input("Enter user name: ")
     password = input("Enter password: ")
-    if DataStorage.UserExist(userName):
-        data = DataStorage.load(userName)
+    data = UserData(userName, password)
+    if data.Load():
         if data.password == password:
             print("Logged in!")
             return data
@@ -99,9 +99,9 @@ def UserRegistration():
                 password = input("Password incorrect! Enter password: ")
             print("Logged in!")
             return data
-    else:
-        data = DataBase.UserData(userName, password)
-        return data
+    print(f"New account '{userName}' created with name password '{password}'.")
+    data.Save()
+    return data
 
 # Entry point of the application
 if __name__ == '__main__':

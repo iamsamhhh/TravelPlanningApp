@@ -17,13 +17,3 @@ def load(key, cache_file="data.sqlite3"):
         return value
     except Exception as ex:
         print("Error during loading data:", ex)
-
-def UserExist(key):
-    try:
-        with SqliteDict("data.sqlite3") as mydict:
-            for i in mydict.keys():
-                if i == key:
-                    return True
-            return False
-    except Exception as ex:
-        print("Error during searching data:", ex)

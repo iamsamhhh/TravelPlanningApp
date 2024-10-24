@@ -24,12 +24,13 @@ def get_float_input(prompt):
 
 def create_activity():
     """Function to prompt user for activity details and create an Activity object."""
+    # Get activity details from user input
     name = input("Enter the name of the activity: ")
     description = input("Enter a description of the activity: ")
     cost = get_float_input("Enter the cost of the activity: ")
     date_time = input("Enter the date and time of the activity (YYYY-MM-DD HH:MM): ")
 
-    # Create an Event object
+    # Create an Activity object with the provided details
     new_activity = Activity(name, description, cost, date_time)
     print("\nActivity Created Successfully!")
     new_activity.display_activity_details()

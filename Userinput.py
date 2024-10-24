@@ -1,5 +1,6 @@
 def UserInput():
     """Prompt for user input and validate it."""
+    # Define valid input options
     valid_inputs = {
         "1": "Create travel plan",
         "2": "Show travel plan list",
@@ -11,10 +12,12 @@ def UserInput():
         "8": "Quit"
     }
 
+    # Display the menu options
     print("Please select an option:")
     for key, value in valid_inputs.items():
         print(f"{key}: {value}")
 
+    # Loop until a valid input is received
     while True:
         user_input = input("Enter the option number: ").strip()
         if user_input in valid_inputs:

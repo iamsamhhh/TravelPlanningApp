@@ -1,7 +1,9 @@
+import DataStorage
 import DataBase
 from TravelPlan import *
 from Activity import *
 from UserInput import *
+import ReviewModule
 
 # Entrance of the app
 def main():
@@ -11,7 +13,6 @@ def main():
     # Boolean to check if there is a travel plan opened
     haveTravelPlanOpened = False
     travelPlan = TravelPlan("")
-    
     # Main application loop
     while not quitApp:
         # Display current open travel plan, if any
@@ -50,10 +51,22 @@ def main():
         elif haveTravelPlanOpened and userInput == "Add activity":
             AddActivity(travelPlan)
             userData.Save()
+
         elif haveTravelPlanOpened and userInput == "Show timeline":
             travelPlan.display_timeline()
+
         elif haveTravelPlanOpened and userInput == "Show total cost":
             print(f"Total cost of travel plan '{travelPlan.name}' is ${travelPlan.get_total_cost():.2f}")
+
+        elif userInput == "Check review":
+            placeName = input("Enter the place you want to look up reviews")
+            place = ReviewModule.Place(placeName)
+            if place.Exist():
+                place.Load()
+                place.ShowReview()
+            else:
+                print(f"There are currently no review for {place}.")
+
         elif userInput == "Quit":
             userData.Save()
             quitApp = True
@@ -76,8 +89,8 @@ def AddActivity(travelPlan):
 def UserRegistration():
     userName = input("Enter user name: ")
     password = input("Enter password: ")
-    if DataBase.UserExist(userName):
-        data = DataBase.load(userName)
+    if DataStorage.UserExist(userName):
+        data = DataStorage.load(userName)
         if data.password == password:
             print("Logged in!")
             return data

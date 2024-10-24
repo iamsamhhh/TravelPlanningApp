@@ -1,6 +1,6 @@
 def UserInput():
     """Prompt for user input and validate it."""
-    # Define valid input options
+    # Define valid actions
     valid_inputs = {
         "1": "Create travel plan",
         "2": "Show travel plan list",
@@ -9,7 +9,8 @@ def UserInput():
         "5": "Add activity",
         "6": "Show timeline",
         "7": "Show total cost",
-        "8": "Quit"
+        "8": "Check review",
+        "9": "Quit"
     }
 
     # Display the menu options

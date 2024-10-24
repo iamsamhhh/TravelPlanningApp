@@ -4,6 +4,7 @@ from TravelPlan import *
 from Activity import *
 from UserInput import *
 import ReviewModule
+from Review import Review
 
 # Entrance of the app
 def main():
@@ -66,6 +67,15 @@ def main():
                 place.ShowReview()
             else:
                 print(f"There are currently no review for {placeName}.")
+
+        elif userInput == "Add review":
+            placeName = input("Enter the place you want to write a review: ")
+            title = input("Enter the title of your review: ")
+            text = input("Write your review:\n")
+            place = ReviewModule.Place(placeName)
+            place.Load()
+            place.AddReview(Review(placeName, userData.userName, title, text))
+            place.Save()
 
         elif userInput == "Quit":
             userData.Save()

@@ -10,7 +10,8 @@ def UserInput():
         "6": "Show timeline",
         "7": "Show total cost",
         "8": "Check review",
-        "9": "Quit"
+        "9": "Add review",
+        "10": "Quit"
     }
 
     # Display the menu options

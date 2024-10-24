@@ -1,7 +1,5 @@
-import DataStorage
+from DataStorage import *
 from sqlitedict import SqliteDict
-from DataBase import save
-from DataBase import load
 from Review import *
 
 class Place:
@@ -23,7 +21,7 @@ class Place:
     
     def Load(self):
         if self.Exist():
-            self.reviews = DataStorage.load(self.name, "Reviews.sqlite3")
+            self.reviews = load(self.name, "Reviews.sqlite3")
             return True
         else:
             return False

@@ -59,22 +59,10 @@ def main():
             print(f"Total cost of travel plan '{travelPlan.name}' is ${travelPlan.get_total_cost():.2f}")
 
         elif userInput == "Check review":
-            placeName = input("Enter the place you want to look up reviews: ")
-            place = ReviewModule.Place(placeName)
-            if place.Exist():
-                place.Load()
-                place.ShowReview()
-            else:
-                print(f"There are currently no review for {placeName}.")
+            CheckReview()
 
         elif userInput == "Add review":
-            placeName = input("Enter the place you want to write a review: ")
-            title = input("Enter the title of your review: ")
-            text = input("Write your review:\n")
-            place = ReviewModule.Place(placeName)
-            place.Load()
-            place.AddReview(Review(placeName, userData.userName, title, text))
-            place.Save()
+            AddReview(userData.userName)
 
         elif userInput == "Quit":
             userData.Save()
@@ -112,6 +100,26 @@ def UserInput():
         else:
             print("Invalid input. Please enter a valid option number.")
 
+def CheckReview():
+    placeName = input("Enter the place you want to look up reviews: ")
+    place = ReviewModule.Place(placeName)
+    if place.Exist():
+        place.Load()
+        place.ShowReview()
+    else:
+        print(f"There are currently no review for {placeName}.")
+
+def AddReview(userName):
+    placeName = input("Enter the place you want to write a review: ")
+    title = input("Enter the title of your review: ")
+    text = input("Write your review:\n")
+    place = ReviewModule.Place(placeName)
+    place.Load()
+    place.AddReview(Review(placeName, userName, title, text))
+    place.Save()
+
+def ShowTotalCost(travelPlan):
+    print(f"Total cost of travel plan '{travelPlan.name}' is ${travelPlan.get_total_cost():.2f}")
 
 # Function to display the list of travel plans the user has created
 def ShowTravelPlanList(userData):

@@ -132,24 +132,36 @@ def AddActivity(travelPlan):
     activity = create_activity()
     travelPlan.add_activity(activity)
 
-# Function to handle user registration or login
+# Function to handle user registration or login, returns user's data
 def UserRegistration():
+    # Let the user enter their user name and password
     userName = input("Enter user name: ")
     password = input("Enter password: ")
+    # Store the data in data class
     data = UserData(userName, password)
-    if data.Load():
+    # Load the data
+    if data.Load(): # Enter if statement if account exist and load successfully.
+
+        # Check if user password entered correctly
         if data.password == password:
             print("Logged in!")
             return data
         else:
+            # Keep letting user enter password until entered correct password
             while password != data.password:
                 password = input("Password incorrect! Enter password: ")
             print("Logged in!")
             return data
-    print(f"New account '{userName}' created with name password '{password}'.")
+
+    # If the account does not exist, tell the user a new account is created.
+    print(f"New account '{userName}' created with password '{password}'.")
+
+    # Save the data
     data.Save()
     return data
 
 # Entry point of the application
+
+# Sample usage
 if __name__ == '__main__':
     main()

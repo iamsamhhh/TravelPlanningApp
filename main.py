@@ -4,7 +4,7 @@ from TravelPlan import *
 from Activity import *
 import ReviewModule
 from Review import Review
-
+import hotel_system
 # Entrance of the app
 def main():
     # Retrieve user data (login or register)
@@ -65,8 +65,7 @@ def main():
             AddReview(userData.userName)
 
         elif userInput == "Book hotel":
-            AddHotelBooking(travelPlan)
-            userData.Save()
+            hotel_system.main()
 
         elif userInput == "Quit":
             userData.Save()

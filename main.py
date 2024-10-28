@@ -64,6 +64,10 @@ def main():
         elif userInput == "Add review":
             AddReview(userData.userName)
 
+        elif userInput == "Book hotel":
+            AddHotelBooking(travelPlan)
+            userData.Save()
+
         elif userInput == "Quit":
             userData.Save()
             quitApp = True
@@ -84,7 +88,8 @@ def UserInput():
         "7": "Show total cost",
         "8": "Check review",
         "9": "Add review",
-        "10": "Quit"
+        "10": "Book hotel",
+        "11": "Quit"
     }
 
     # Display the menu options
@@ -165,3 +170,29 @@ def UserRegistration():
 # Sample usage
 if __name__ == '__main__':
     main()
+
+# Add this new function
+def AddHotelBooking(travelPlan):
+    hotel_system = HotelSystem()
+    
+    print("\nAvailable Rooms:")
+    for room_type, info in hotel_system.rooms.items():
+        print(f"{room_type.title()}: {info['available']} rooms at ${info['price']}/night")
+    
+    # Get booking details
+    guest_name = input("Enter guest name: ")
+    print("\nRoom types: standard, deluxe")
+    room_type = input("Enter room type: ").lower()
+    
+    while True:
+        try:
+            nights = int(input("Enter number of nights: "))
+            if nights <= 0:
+                print("Invalid number of nights. Please enter a positive integer.")
+            else:
+                break
+        except ValueError:
+            print("Invalid input. Please enter a positive integer.")
+    
+    # Book the hotel
+    hotel_system.book_room(guest_name, room_type, nights)

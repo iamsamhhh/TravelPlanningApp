@@ -4,7 +4,7 @@ from TravelPlan import *
 from Activity import *
 import ReviewModule
 from Review import Review
-import hotel_system
+from hotel_system import *
 # Entrance of the app
 def main():
     # Retrieve user data (login or register)
@@ -65,8 +65,11 @@ def main():
             AddReview(userData.userName)
 
         elif userInput == "Book hotel":
-            hotel_system.main()
+            AddHotelBooking()
 
+        elif userInput == "View Bookings":
+            ViewBookings()
+        
         elif userInput == "Quit":
             userData.Save()
             quitApp = True
@@ -88,6 +91,7 @@ def UserInput():
         "8": "Check review",
         "9": "Add review",
         "10": "Book hotel",
+        "12": "View Bookings",
         "11": "Quit"
     }
 
@@ -164,14 +168,8 @@ def UserRegistration():
     data.Save()
     return data
 
-# Entry point of the application
-
-# Sample usage
-if __name__ == '__main__':
-    main()
-
-# Add this new function
-def AddHotelBooking(travelPlan):
+# Create a booking
+def AddHotelBooking(userName):
     hotel_system = HotelSystem()
     
     print("\nAvailable Rooms:")
@@ -179,7 +177,7 @@ def AddHotelBooking(travelPlan):
         print(f"{room_type.title()}: {info['available']} rooms at ${info['price']}/night")
     
     # Get booking details
-    guest_name = input("Enter guest name: ")
+    guest_name = userName
     print("\nRoom types: standard, deluxe")
     room_type = input("Enter room type: ").lower()
     
@@ -194,4 +192,23 @@ def AddHotelBooking(travelPlan):
             print("Invalid input. Please enter a positive integer.")
     
     # Book the hotel
-    hotel_system.book_room(guest_name, room_type, nights)
+    hotel_system.create_booking(guest_name, room_type, nights)
+
+def ViewBookings():
+    hotelSystem = HotelSystem()
+    if not hotelSystem.bookings:
+        print("\nNo bookings found.")
+    else:
+        for booking in hotelSystem.bookings:
+            print(f"\nID: {booking['id']}")
+            print(f"Guest: {booking['guest']}")
+            print(f"Room: {booking['room']}")
+            print(f"Nights: {booking['nights']}")
+            print(f"Total: ${booking['total']}")
+
+# Entry point of the application
+
+# Sample usage
+if __name__ == '__main__':
+    main()
+
